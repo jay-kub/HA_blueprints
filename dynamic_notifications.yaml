@@ -60,21 +60,7 @@ variables:
     
     {% endfor %}
     {{ home.group }}"
-  awaygroup: " {% set home = namespace(group=[]) %}
-    {% set away = namespace(group=[]) %}
-
-    {% for index in test.entity_id %}
-
-    {% if is_state(index, 'home') %}
-
-    {% set home.group = home.group + [index] %}
-    {% else %}
-    {% set away.group = away.group + [index] %}
-
-    {% endif %}
-
-    {% endfor %}
-    {{ away.group }}"
+  awaygroup: "{{ away.group }}"
 
 sequence:
   - service: notify.jake
