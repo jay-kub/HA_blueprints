@@ -43,12 +43,12 @@ blueprint:
     
 
 variables:
-  test: !input notify_group.entity_id
+  test: !input notify_group
   n_tag: !input notification_tag
   homegroup: "{% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in test %}
+    {% for index in test.entity_id %}
 
     {% if is_state(index, 'home') %}
 
@@ -63,7 +63,7 @@ variables:
   awaygroup: " {% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in test %}
+    {% for index in test.entity_id %}
 
     {% if is_state(index, 'home') %}
 
