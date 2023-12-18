@@ -4,7 +4,7 @@ blueprint:
   domain: script
   author: jay-kub
   input:
-    people_list:
+    notify_group:
       name: Who would you like to notify?
       default: []
       selector:
@@ -42,12 +42,12 @@ blueprint:
     
 
 variables:
-  test: !input people_list.entity_id
+  test: !input notify_group
   n_tag: !input notification_tag
   homegroup: "{% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in test %}
+    {% for index in notify_group %}
 
     {% if is_state(index, 'home') %}
 
@@ -62,7 +62,7 @@ variables:
   awaygroup: " {% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in test %}
+    {% for index in notify_group %}
 
     {% if is_state(index, 'home') %}
 
