@@ -66,7 +66,7 @@ sequence:
                   data:
                     tag: "{{ n_tag }}"
                     # notification_icon: mdi:trash-can-outline
-                enabled: true
+                
           - conditions: []
             sequence:
               - wait_for_trigger:
@@ -80,14 +80,16 @@ sequence:
                   seconds: 0
                   milliseconds: 0
                 continue_on_timeout: false
-              - service: "{{ device }}"
+              - device_id: !input notify_device
+                domain: mobile_app
+                type: notify
                 data:
                   # message: "{{ message }}"
                   message: "this is a test"
                   data:
                     tag: "{{ n_tag }}"
                     # notification_icon: mdi:trash-can-outline
-                enabled: true
+                
       - choose:
           - conditions: []
             sequence:
