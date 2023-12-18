@@ -6,7 +6,8 @@ blueprint:
   input:
     notify_group:
       name: Who would you like to notify?
-      default: []
+      default: 
+        entity_id: []
       selector:
         target:
           entity:
@@ -47,7 +48,7 @@ variables:
   homegroup: "{% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in notify_group %}
+    {% for index in notify_group.entity_id %}
 
     {% if is_state(index, 'home') %}
 
@@ -62,7 +63,7 @@ variables:
   awaygroup: " {% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in notify_group %}
+    {% for index in notify_group.entity_id %}
 
     {% if is_state(index, 'home') %}
 
