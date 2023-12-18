@@ -4,14 +4,14 @@ blueprint:
   domain: script
   author: jay-kub
   input:
-    device:
+    notify_device:
       name: Which device would you like to notify?
       default: []
       selector:
         device:
           integration: mobile_app
           multiple: false
-    person:
+    notify_person:
       name: Entity to track for presense?
       description: Enter the person entity or device_tracker which will be used to determine if the user is home or away.
       default: ''
@@ -45,7 +45,7 @@ blueprint:
       default: ''
 
 variables:
-  device: !input device
+  device: !input notify_device
   n_tag: !input notification_tag
   clear_trigger: !input clear_trigger
 
@@ -54,12 +54,15 @@ sequence:
       - choose:
           - conditions:
               - condition: state
-                entity_id: !input person
+                entity_id: !input notify_person
                 state: home
             sequence:
-              - service: "{{ device }}"
+              - device_id: !input notify_device
+                domain: mobile_app
+                type: notify
                 data:
-                  message: "{{ message }}"
+                  # message: "{{ message }}"
+                  message: "this is a test"
                   data:
                     tag: "{{ n_tag }}"
                     # notification_icon: mdi:trash-can-outline
@@ -69,7 +72,7 @@ sequence:
               - wait_for_trigger:
                   - platform: state
                     entity_id:
-                      - !input person
+                      - !input notify_person
                     to: home
                 timeout:
                   hours: 24
