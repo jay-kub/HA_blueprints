@@ -91,5 +91,5 @@ sequence:
               - service: notify.jake_and_ang
                 data:
                   data:
-                    tag: "{{ n_tag }}""
+                    tag: "{{ n_tag }}"
                   message: clear_notification
