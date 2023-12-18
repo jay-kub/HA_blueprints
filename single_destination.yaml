@@ -6,23 +6,20 @@ blueprint:
   input:
     device:
       name: Which device would you like to notify?
-      default: 
-        entity_id: []
+      default: []
       selector:
         device:
           integration: mobile_app
           multiple: false
     person:
-      name: Which person is thegit  device tied to?
-      default: 
-        entity_id: []
+      name: Which person is the device tied to?
+      default: []
       selector:
-        target:
-          entity:
-            domain: person
+        entity:
+          domain: person
     only_home:
       name: Notify only if home?
-      description: Notifications will only be sent if the person is home.
+      description: Should notifications only be sent if the person is home?
       default: false
       selector:
         boolean: {}
@@ -50,10 +47,8 @@ blueprint:
       default: ''
 
 variables:
-  device_input: !input device
-  device: "{{ device_input.entity_id }}"
-  person_input: !input person
-  person: "{{ person_input.entity_id }}"
+  device: !input device
+  person: !input person
   n_tag: !input notification_tag
   clear_trigger: !input clear_trigger
 
@@ -62,7 +57,7 @@ sequence:
       - choose:
           - conditions:
               - condition: state
-                entity_id: "{{ person }}"
+                entity_id: !input 
                 state: home
             sequence:
               - service: "{{ device }}"
