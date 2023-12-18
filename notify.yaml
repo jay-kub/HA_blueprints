@@ -1,0 +1,62 @@
+blueprint:
+  name: Send Dynamic Notifications
+  description: Send notifications based on presense detection and use triggers to clear them.
+  domain: script
+  author: jay-kub
+  input:
+    notify_destination:
+      name: Who would you like to notify?
+      default: []
+      selector:
+        target:
+          entity:
+            domain: person
+    clear_notification_trigger:
+      name: "Trigger to Clear Notification"
+      description: "Leave empty if you don't want the notification to be cleared"
+      default: []
+      selector:
+        trigger:
+
+variables:
+  test: !input notify_destination
+  homegroup: "{% set home = namespace(group=[]) %}
+    {% set away = namespace(group=[]) %}
+
+    {% for index in test %}
+
+    {% if is_state(index, 'home') %}
+
+    {% set home.group = home.group + [index] %}
+    {% else %}
+    {% set away.group = away.group + [index] %}
+
+    {% endif %}
+    
+    {% endfor %}
+    {{ home.group|unique|list|lower }}"
+  awaygroup: " {% set home = namespace(group=[]) %}
+    {% set away = namespace(group=[]) %}
+
+    {% for index in test %}
+
+    {% if is_state(index, 'home') %}
+
+    {% set home.group = home.group + [index] %}
+    {% else %}
+    {% set away.group = away.group + [index] %}
+
+    {% endif %}
+
+    {% endfor %}
+    {{ away.group|unique|list|lower }}"
+
+sequence:
+  - service: notify.jake
+    data:
+      message: "Home: {{ homegroup }}. Away: {{ awaygroup }}. {{test}} boop"
+      # data:
+      #   tag: trash
+      #   notification_icon: mdi:trash-can-outline
+    enabled: true     
+mode: parallel
