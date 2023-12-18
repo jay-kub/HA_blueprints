@@ -59,7 +59,7 @@ variables:
     {% endif %}
     
     {% endfor %}
-    {{ home.group|unique|list|lower }}"
+    {{ home.group }}"
   awaygroup: " {% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
@@ -74,7 +74,7 @@ variables:
     {% endif %}
 
     {% endfor %}
-    {{ away.group|unique|list|lower }}"
+    {{ away.group }}"
 
 sequence:
   - service: notify.jake
