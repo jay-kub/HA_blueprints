@@ -60,12 +60,10 @@ sequence:
               - device_id: !input notify_device
                 domain: mobile_app
                 type: notify
+                message: "this is a test"
                 data:
-                  # message: "{{ message }}"
-                  message: "this is a test"
-                  data:
-                    tag: "{{ n_tag }}"
-                    # notification_icon: mdi:trash-can-outline
+                  tag: "{{ n_tag }}"
+                  # notification_icon: mdi:trash-can-outline
                 
           - conditions: []
             sequence:
@@ -83,13 +81,10 @@ sequence:
               - device_id: !input notify_device
                 domain: mobile_app
                 type: notify
+                message: "this is a test"
                 data:
-                  # message: "{{ message }}"
-                  message: "this is a test"
-                  data:
-                    tag: "{{ n_tag }}"
-                    # notification_icon: mdi:trash-can-outline
-                
+                  tag: "{{ n_tag }}"
+                  # notification_icon: mdi:trash-can-outline
       - choose:
           - conditions: []
             sequence:
