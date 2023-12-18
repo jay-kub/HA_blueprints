@@ -4,7 +4,7 @@ blueprint:
   domain: script
   author: jay-kub
   input:
-    peope_list:
+    people_list:
       name: Who would you like to notify?
       default: []
       selector:
@@ -18,14 +18,14 @@ blueprint:
       selector:
         boolean: {}
     only_home_wait:
-      name: If initially away, notify when home?
+      name: Notify when home?
       description: People who are initially away will receive a notification when their state changes to home.
       default: false
       selector:
         boolean: {}
     clear_notifications:
       name: Trigger to clear notifications?
-      description: After the notifications are sent, the script will watch for the trigger below and then clear the notification.
+      description: The script will watch for the trigger below, and once triggered it will clear all notifications and stop the script.
       default: false
       selector:
         boolean: {}    
@@ -35,10 +35,15 @@ blueprint:
       default: []
       selector:
         trigger:
+    notification_tag:
+      name: Notification Tag
+      description: This tag will be used by home assistant to track the notifications. Please ensure you haven't used the same tag in other automations.
+      default: ''
     
 
 variables:
-  test: !input peope_list
+  test: !input people_list
+  n_tag: !input notification_tag
   homegroup: "{% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
