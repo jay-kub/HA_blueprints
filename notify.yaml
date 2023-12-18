@@ -1,5 +1,5 @@
 blueprint:
-  name: Send Dynamic Notifications
+  name: Dynamic Notifications
   description: Send notifications based on presense detection and use triggers to clear them.
   domain: script
   author: jay-kub
@@ -42,7 +42,7 @@ blueprint:
     
 
 variables:
-  test: !input people_list
+  test: !input people_list.entity_id
   n_tag: !input notification_tag
   homegroup: "{% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
