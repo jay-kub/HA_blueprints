@@ -4,22 +4,41 @@ blueprint:
   domain: script
   author: jay-kub
   input:
-    notify_destination:
+    peope_list:
       name: Who would you like to notify?
       default: []
       selector:
         target:
           entity:
             domain: person
+    only_home:
+      name: Notify only if home?
+      description: Notifications will only be sent to people who are home.
+      default: false
+      selector:
+        boolean: {}
+    only_home_wait:
+      name: If initially away, notify when home?
+      description: People who are initially away will receive a notification when their state changes to home.
+      default: false
+      selector:
+        boolean: {}
+    clear_notifications:
+      name: Trigger to clear notifications?
+      description: After the notifications are sent, the script will watch for the trigger below and then clear the notification.
+      default: false
+      selector:
+        boolean: {}    
     clear_notification_trigger:
       name: "Trigger to Clear Notification"
       description: "Leave empty if you don't want the notification to be cleared"
       default: []
       selector:
         trigger:
+    
 
 variables:
-  test: !input notify_destination
+  test: !input peope_list
   homegroup: "{% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
