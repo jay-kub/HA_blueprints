@@ -12,11 +12,9 @@ blueprint:
           integration: mobile_app
           multiple: false
     person:
-      name: Which person is the device tied to?
-      default: []
-      selector:
-        entity:
-          domain: person
+      name: Entity to track for presense?
+      description: Enter the person entity or device_tracker which will be used to determine if the user is home or away.
+      default: ''
     only_home:
       name: Notify only if home?
       description: Should notifications only be sent if the person is home?
@@ -48,7 +46,6 @@ blueprint:
 
 variables:
   device: !input device
-  person: !input person
   n_tag: !input notification_tag
   clear_trigger: !input clear_trigger
 
@@ -57,7 +54,7 @@ sequence:
       - choose:
           - conditions:
               - condition: state
-                entity_id: !input 
+                entity_id: !input person
                 state: home
             sequence:
               - service: "{{ device }}"
@@ -72,7 +69,7 @@ sequence:
               - wait_for_trigger:
                   - platform: state
                     entity_id:
-                      - "{{ person }}"
+                      - !input person
                     to: home
                 timeout:
                   hours: 24
