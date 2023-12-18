@@ -82,7 +82,8 @@ sequence:
                 continue_on_timeout: false
               - service: "{{ device }}"
                 data:
-                  message: "{{ message }}"
+                  # message: "{{ message }}"
+                  message: "this is a test"
                   data:
                     tag: "{{ n_tag }}"
                     # notification_icon: mdi:trash-can-outline
