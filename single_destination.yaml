@@ -13,7 +13,7 @@ blueprint:
           integration: mobile_app
           multiple: false
     person:
-      name: Which person is the device tied to?
+      name: Which person is thegit  device tied to?
       default: 
         entity_id: []
       selector:
@@ -50,8 +50,10 @@ blueprint:
       default: ''
 
 variables:
-  device: !input device
-  person: !input person
+  device_input: !input device
+  device: "{{ device_input.entity_id }}"
+  person_input: !input person
+  person: "{{ person_input.entity_id }}"
   n_tag: !input notification_tag
   clear_trigger: !input clear_trigger
 
