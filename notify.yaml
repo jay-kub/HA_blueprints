@@ -48,7 +48,7 @@ variables:
   homegroup: "{% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in test.entity_id %}
+    {% for index in test %}
 
     {% if is_state(index, 'home') %}
 
@@ -63,7 +63,7 @@ variables:
   awaygroup: " {% set home = namespace(group=[]) %}
     {% set away = namespace(group=[]) %}
 
-    {% for index in test.entity_id %}
+    {% for index in test %}
 
     {% if is_state(index, 'home') %}
 
