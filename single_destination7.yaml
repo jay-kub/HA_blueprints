@@ -47,7 +47,6 @@ blueprint:
 variables:
   device: !input notify_device
   n_tag: !input notification_tag
-  clear_trigger: !input clear_trigger
 
 sequence:
   - parallel:
@@ -88,7 +87,7 @@ sequence:
       - choose:
           - conditions: []
             sequence:
-              # - wait_for_trigger: "{{ clear_trigger }}" 
+              - wait_for_trigger: !input clear_trigger
               - service: notify.jake_and_ang
                 data:
                   data:
