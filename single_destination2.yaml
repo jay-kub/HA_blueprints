@@ -87,7 +87,7 @@ sequence:
       - choose:
           - conditions: []
             sequence:
-              - wait_for_trigger: "{{ clear_trigger }}" 
+              # - wait_for_trigger: "{{ clear_trigger }}" 
               - service: notify.jake_and_ang
                 data:
                   data:
