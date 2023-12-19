@@ -48,7 +48,10 @@ fields:
 #   device: !input notify_device
 #   n_tag: !input notification_tag
 
-sequence: []
+sequence:
+  - service: notify.jake
+    data:
+      message: this is a test
 #   - parallel:
 #       - choose:
 #           - conditions:
