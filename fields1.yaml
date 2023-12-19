@@ -15,6 +15,8 @@ fields:
     name: Entity to track for presense?
     description: Enter the person entity or device_tracker which will be used to determine if the user is home or away.
     default: ''
+    selector:
+      text:
   only_home:
     name: Notify only if home?
     description: Should notifications only be sent if the person is home?
