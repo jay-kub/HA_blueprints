@@ -6,7 +6,6 @@ blueprint:
 input:
  notify_device:
    name: Which device would you like to notify?
-    default: []
     selector:
      device:
        integration: mobile_app
