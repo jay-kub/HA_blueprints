@@ -45,18 +45,17 @@ fields:
     default: ''
 
 variables:
-  device: !input notify_device
-  n_tag: !input notification_tag
+
 
 sequence:
   - parallel:
       - choose:
           - conditions:
               - condition: state
-                entity_id: !input notify_person
+                entity_id: "{{ notify_person }}"
                 state: home
             sequence:
-              - device_id: !input notify_device
+              - device_id: "{{ notify_device }}"
                 domain: mobile_app
                 type: notify
                 message: "this is a test"
@@ -69,7 +68,7 @@ sequence:
               - wait_for_trigger:
                   - platform: state
                     entity_id:
-                      - !input notify_person
+                      - "{{ notify_person }}"
                     to: home
                 timeout:
                   hours: 24
@@ -77,7 +76,7 @@ sequence:
                   seconds: 0
                   milliseconds: 0
                 continue_on_timeout: false
-              - device_id: !input notify_device
+              - device_id: "{{ notify_device }}"
                 domain: mobile_app
                 type: notify
                 message: "this is a test"
@@ -87,7 +86,7 @@ sequence:
       - choose:
           - conditions: []
             sequence:
-              - wait_for_trigger: !input clear_trigger
+              - wait_for_trigger: "{{ clear_trigger }}"
               - service: notify.jake_and_ang
                 data:
                   data:
