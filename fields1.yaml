@@ -54,7 +54,7 @@ variables:
 sequence:
   - service: notify.jake
     data:
-      message: "{{ n _device }} {{ n_person }} {{ n_tag }}"
+      message: "{{ n_device }} {{ n_person }} {{ n_tag }}"
 #   - parallel:
 #       - choose:
 #           - conditions:
