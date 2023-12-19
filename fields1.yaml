@@ -44,14 +44,15 @@ fields:
     description: This tag will be used by home assistant to track the notifications. Please ensure you haven't used the same tag in other automations.
     default: ''
 
-# variables:
-#   device: !input notify_device
-#   n_tag: !input notification_tag
+variables:
+  n_device: "{{ notify_device }}"
+  n_person: "{{ notify_person }}"
+  n_tag: "{{ notification_tag }}"
 
 sequence:
   - service: notify.jake
     data:
-      message: this is a test
+      message: "{{ n _device }} {{ n_person }} {{ n_tag }}"
 #   - parallel:
 #       - choose:
 #           - conditions:
