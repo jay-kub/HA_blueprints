@@ -48,7 +48,7 @@ fields:
 #   device: !input notify_device
 #   n_tag: !input notification_tag
 
-# sequence:
+sequence: []
 #   - parallel:
 #       - choose:
 #           - conditions:
