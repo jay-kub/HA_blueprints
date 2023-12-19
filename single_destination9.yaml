@@ -44,9 +44,6 @@ fields:
     description: This tag will be used by home assistant to track the notifications. Please ensure you haven't used the same tag in other automations.
     default: ''
 
-variables:
-
-
 sequence:
   - parallel:
       - choose:
