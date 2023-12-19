@@ -17,6 +17,11 @@ fields:
     default: ''
     selector:
       text:
+  notification_message:
+    name: Message
+    default: ''
+    selector:
+      text:
   only_home:
     name: Notify only if home?
     description: Should notifications only be sent if the person is home?
@@ -51,12 +56,17 @@ fields:
 variables:
   n_device: "{{ notify_device }}"
   n_person: "{{ notify_person }}"
+  n_message: "{{ notification_message }}"
   n_tag: "{{ notification_tag }}"
 
 sequence:
-  - service: notify.jake
+  - device_id: "{{ n_device }}"
+    domain: mobile_app
+    type: notify
+    message: "{{ n_message}}"
     data:
-      message: "{{ n_device }} {{ n_person }} {{ n_tag }}"
+      tag: "{{ n_tag }}"
+
 #   - parallel:
 #       - choose:
 #           - conditions:
